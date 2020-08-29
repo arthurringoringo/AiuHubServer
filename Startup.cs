@@ -15,6 +15,9 @@ using Npgsql;
 using Microsoft.EntityFrameworkCore;
 using AiuHubServer.Infrastructure.DbExtension;
 using System.Reflection;
+using AiuHubServer.Services.SarraService;
+using AiuHubServer.Services;
+using AiuHubServer.Repository;
 
 namespace AiuHubServer
 {
@@ -43,8 +46,11 @@ namespace AiuHubServer
                            sqlOptions.EnableRetryOnFailure(10, TimeSpan.FromSeconds(30), null);
                        });
                    });
-              
 
+
+            services.AddScoped<ISarraAPIService, SarraAPIService>();
+            services.AddScoped<INewsAndAnnouncementService, NewsAndAnnouncementService>();
+            services.AddScoped<INewsAndAnnouncementRepository, NewsAndAnnouncementRepository>();
 
             services.AddControllers();
         }
@@ -70,6 +76,7 @@ namespace AiuHubServer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
             });
         }
     }
