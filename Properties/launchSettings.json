@@ -7,7 +7,7 @@
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "POSTGRES_CONNECTIONSTRING": "User ID=Service1CRUD;Password=KkNsE2qLEwfkalEv;Host=35.198.221.3;Port=5432;Database=AiuHub;Pooling=true;"
+        "POSTGRES_CONNECTIONSTRING": "User ID=postgres;Password=wordpass123;Host=localhost;Port=5432;Database=AiuHub;Pooling=true;"
       }
     }
   }

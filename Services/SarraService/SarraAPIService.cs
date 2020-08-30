@@ -33,13 +33,24 @@ namespace AiuHubServer.Services.SarraService
 
 
 
-        public  List<SarraNewsDto> Run()
+        public  string Run()
         {
             List<SarraNewsDto> result = new List<SarraNewsDto>();
-
+            
             result =  GetNews();
 
-            return result;
+            int succes = 0;
+
+            foreach (var item in result)
+            {
+              var succesCode =  _NewsAndAnnouncementService.SarraToDb(item);
+
+                if (succesCode.Equals("Success"))
+                {
+                    succes++;
+                }
+            }
+            return $"{succes} News sucess added to DB";
         }
 
 
@@ -63,7 +74,6 @@ namespace AiuHubServer.Services.SarraService
 
                         result = JsonConvert.DeserializeObject<List<SarraNewsDto>>(SarraResponseBody);
 
-                        
                     }
 
 

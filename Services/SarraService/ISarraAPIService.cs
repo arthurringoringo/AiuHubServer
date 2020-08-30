@@ -5,6 +5,6 @@ namespace AiuHubServer.Services.SarraService
 {
     public interface ISarraAPIService
     {
-        public List<SarraNewsDto> Run();
+        public string Run();
     }
 }

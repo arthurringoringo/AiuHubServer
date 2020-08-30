@@ -19,16 +19,15 @@ namespace AiuHubServer.Repository
             _context = context ?? throw new ArgumentException(nameof(context));
         }
 
-        public async Task<string> AddItem(NewsAndAnnouncement Item)
+        public string AddItem(NewsAndAnnouncement Item)
         {
             var response = string.Empty;
             try
             {
-                Item.CreatedOn = DateTime.UtcNow;
 
                 _context.NewsAndAnnouncement.Add(Item);
 
-                await _context.SaveChangesAsync();
+               _context.SaveChanges();
 
                 response = "Success";
 
