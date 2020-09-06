@@ -33,7 +33,7 @@ namespace AiuHubServer.Services.SarraService
 
 
 
-        public  string Run()
+        public string Run()
         {
             List<SarraNewsDto> result = new List<SarraNewsDto>();
             
@@ -42,7 +42,8 @@ namespace AiuHubServer.Services.SarraService
             int succes = 0;
 
             foreach (var item in result)
-            {
+            {      
+
               var succesCode =  _NewsAndAnnouncementService.SarraToDb(item);
 
                 if (succesCode.Equals("Success"))

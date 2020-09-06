@@ -1,6 +1,7 @@
 ﻿using AiuHubServer.Infrastructure.Entity;
 using AiuHubServer.Repository;
 using AiuHubServer.Services.SarraService;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http.Features;
 using System;
 using System.Collections.Generic;
@@ -36,9 +37,20 @@ namespace AiuHubServer.Services
             news.PostID = item.PostId;
 
             var result = string.Empty;
+
+            var duplicate = _NewsAndAnnouncementRepository.GetItemById(news.PostID);
+
+            if (duplicate.Count != 0)
+            {
+                return result;
+            }
+
             try
             {
-               result = _NewsAndAnnouncementRepository.AddItem(news);
+
+                result = _NewsAndAnnouncementRepository.AddItem(news);
+
+
             }
             catch (Exception e)
             {

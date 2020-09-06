@@ -40,32 +40,32 @@ namespace AiuHubServer.Repository
             }
         }
 
-        public async Task<List<NewsAndAnnouncement>> GetAllItem()
+        public List<NewsAndAnnouncement> GetAllItem()
         {
-            var result = _context.NewsAndAnnouncement.ToListAsync();
+            var result = _context.NewsAndAnnouncement.ToList();
 
-            return await result;
+            return result;
         }
 
-        public async Task<List<NewsAndAnnouncement>> GetItemByDate(DateTime DateTime)
+        public List<NewsAndAnnouncement> GetItemByDate(DateTime DateTime)
         {
-            var result = _context.NewsAndAnnouncement.Where(m => m.PostedDate == DateTime || m.CreatedOn == DateTime).ToListAsync();
+            var result = _context.NewsAndAnnouncement.Where(m => m.PostedDate == DateTime || m.CreatedOn == DateTime).ToList();
 
-            return await result;
+            return result;
         }
 
-        public async Task<List<NewsAndAnnouncement>> GetItemById(Guid ID)
+        public List<NewsAndAnnouncement> GetItemById(int ID)
         {
-            var result = _context.NewsAndAnnouncement.Where(m => m.Id == ID).ToListAsync();
+            var result = _context.NewsAndAnnouncement.Where(m => m.PostID == ID).ToList();
 
-            return await result;
+            return result;
         }
 
-        public async Task<List<NewsAndAnnouncement>> GetItemBySource(string Source)
+        public List<NewsAndAnnouncement> GetItemBySource(string Source)
         {
-           var result = _context.NewsAndAnnouncement.Where(m => m.Source == Source).ToListAsync(); 
+           var result = _context.NewsAndAnnouncement.Where(m => m.Source == Source).ToList(); 
 
-            return await result;
+            return result;
         
         }
     }

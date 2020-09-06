@@ -35,6 +35,7 @@ namespace AiuHubServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddDbContext<ServerDBContext>(
                    e =>
                    {
@@ -45,9 +46,10 @@ namespace AiuHubServer
                            sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
                            sqlOptions.EnableRetryOnFailure(10, TimeSpan.FromSeconds(30), null);
                        });
+                    
                    });
 
-
+           
             services.AddScoped<ISarraAPIService, SarraAPIService>();
             services.AddScoped<INewsAndAnnouncementService, NewsAndAnnouncementService>();
             services.AddScoped<INewsAndAnnouncementRepository, NewsAndAnnouncementRepository>();
