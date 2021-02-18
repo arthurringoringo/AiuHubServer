@@ -23,8 +23,8 @@ namespace AiuHubServer
 {
     public class Startup
     {
-        private const string AllowOrigins = "*";
-
+        //private const string AllowOrigins = "*";
+        readonly string MyPolicyName = "_MyPolicyName";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -48,8 +48,19 @@ namespace AiuHubServer
                        });
                     
                    });
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyPolicyName,
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
-           
+
+
             services.AddScoped<ISarraAPIService, SarraAPIService>();
             services.AddScoped<INewsAndAnnouncementService, NewsAndAnnouncementService>();
             services.AddScoped<INewsAndAnnouncementRepository, NewsAndAnnouncementRepository>();
@@ -67,13 +78,11 @@ namespace AiuHubServer
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(MyPolicyName);
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            app.UseAuthorization();
-
-            app.UseCors(AllowOrigins);
+         
 
             app.UseEndpoints(endpoints =>
             {

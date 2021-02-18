@@ -42,7 +42,7 @@ namespace AiuHubServer.Repository
 
         public List<NewsAndAnnouncement> GetAllItem()
         {
-            var result = _context.NewsAndAnnouncement.ToList();
+                var result = _context.NewsAndAnnouncement.OrderByDescending(x => x.PostID).ToList();
 
             return result;
         }
